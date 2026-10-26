@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es" data-theme="silver">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#e7e8eb" />
+    <meta name="description" content="Un iPod classic en el navegador, conectado a tus listas de Spotify." />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>iPod</title>
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/ipod.css" />
+    <link rel="stylesheet" href="/css/screen.css" />
+    <script type="module" src="/js/app.js"></script>
+  </head>
+  <body>
+    <main class="stage">
+      <div class="ipod" aria-label="iPod">
+        <div class="bezel">
+          <div class="lcd">
+            <header class="statusbar">
+              <span class="status-play" id="status-play" aria-hidden="true">
+                <svg viewBox="0 0 10 10"><path d="M2 1l7 4-7 4z" /></svg>
+              </span>
+              <span class="status-title" id="status-title">iPod</span>
+              <span class="battery" aria-hidden="true"><i></i></span>
+            </header>
+            <div class="viewport" id="viewport"></div>
+            <div class="toast" id="toast" role="status"></div>
+          </div>
+        </div>
+
+        <div class="wheel-area">
+          <div class="wheel" id="wheel">
+            <span class="wheel-label w-menu" data-zone="menu" aria-hidden="true">MENU</span>
+            <span class="wheel-label w-next" data-zone="next" aria-hidden="true">
+              <svg viewBox="0 0 24 12"><path d="M1 1l9 5-9 5zM11 1l9 5-9 5zM21 1h2v10h-2z" /></svg>
+            </span>
+            <span class="wheel-label w-play" data-zone="play" aria-hidden="true">
+              <svg viewBox="0 0 24 12"><path d="M1 1l9 5-9 5zM14 1h3v10h-3zM19 1h3v10h-3z" /></svg>
+            </span>
+            <span class="wheel-label w-prev" data-zone="prev" aria-hidden="true">
+              <svg viewBox="0 0 24 12"><path d="M23 1l-9 5 9 5zM13 1l-9 5 9 5zM3 1H1v10h2z" /></svg>
+            </span>
+            <button class="wheel-center" id="wheel-center" type="button" aria-label="Seleccionar"></button>
+          </div>
+        </div>
+      </div>
+      <p class="sr-only" id="sr-live" aria-live="polite"></p>
+    </main>
+    <noscript><p class="noscript">Activa JavaScript para usar el iPod.</p></noscript>
+  </body>
+</html>

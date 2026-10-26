@@ -1,0 +1,165 @@
+/* Carcasa, pantalla (marco) y rueda de clic. Todas las medidas escalan con --w. */
+:root {
+  --body: linear-gradient(165deg, #f3f4f6 0%, #d6d8dc 38%, #c4c6cb 62%, #dcdde1 100%);
+  --body-edge: rgba(255, 255, 255, 0.85);
+  --brush: rgba(255, 255, 255, 0.07);
+  --wheel: radial-gradient(circle at 50% 35%, #ffffff 0%, #f1f1f3 55%, #e2e3e6 100%);
+  --wheel-ring: rgba(0, 0, 0, 0.08);
+  --wheel-label: #a9abb2;
+  --wheel-label-on: #6c6f77;
+  --center: linear-gradient(170deg, #e8e9ec, #c9cbd0);
+  --center-shadow: rgba(0, 0, 0, 0.18);
+}
+
+:root[data-theme='black'] {
+  --body: linear-gradient(165deg, #3a3b3f 0%, #1d1e21 45%, #121315 70%, #2a2b2f 100%);
+  --body-edge: rgba(255, 255, 255, 0.14);
+  --brush: rgba(255, 255, 255, 0.025);
+  --wheel: radial-gradient(circle at 50% 35%, #2c2d31 0%, #1c1d20 60%, #141517 100%);
+  --wheel-ring: rgba(255, 255, 255, 0.05);
+  --wheel-label: #8d8f96;
+  --wheel-label-on: #d5d6da;
+  --center: linear-gradient(170deg, #2a2b2f, #17181a);
+  --center-shadow: rgba(0, 0, 0, 0.5);
+}
+
+:root[data-theme='white'] {
+  --body: linear-gradient(165deg, #ffffff 0%, #f6f6f7 50%, #ececee 100%);
+  --body-edge: rgba(255, 255, 255, 1);
+  --brush: transparent;
+  --wheel: radial-gradient(circle at 50% 35%, #ffffff 0%, #f7f7f8 60%, #ececee 100%);
+  --wheel-label: #b5b7bd;
+  --center: linear-gradient(170deg, #f4f4f6, #dcdde1);
+}
+
+/* ── Carcasa ──────────────────────────────────────────────── */
+.ipod {
+  position: relative;
+  width: var(--w);
+  height: calc(var(--w) / 0.6);
+  border-radius: calc(var(--w) * 0.085);
+  background: repeating-linear-gradient(90deg, var(--brush) 0 1px, transparent 1px 3px), var(--body);
+  box-shadow:
+    inset 0 0 0 1px var(--body-edge),
+    inset 0 calc(var(--w) * -0.01) calc(var(--w) * 0.03) rgba(0, 0, 0, 0.08),
+    0 calc(var(--w) * 0.05) calc(var(--w) * 0.12) rgba(0, 0, 0, 0.28),
+    0 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: calc(var(--w) * 0.075);
+  transition: background 0.4s ease;
+}
+
+/* ── Marco negro de la pantalla ───────────────────────────── */
+.bezel {
+  --sw: calc(var(--w) * 0.8);
+  width: calc(var(--sw) + var(--w) * 0.05);
+  padding: calc(var(--w) * 0.025);
+  border-radius: calc(var(--w) * 0.035);
+  background: linear-gradient(180deg, #1b1b1d, #050506);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
+    0 1px 0 var(--body-edge);
+}
+
+/* ── Rueda de clic ────────────────────────────────────────── */
+.wheel-area {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  width: 100%;
+}
+
+.wheel {
+  --d: calc(var(--w) * 0.7);
+  position: relative;
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  background: var(--wheel);
+  box-shadow:
+    inset 0 0 0 1px var(--wheel-ring),
+    inset 0 calc(var(--d) * 0.01) calc(var(--d) * 0.02) rgba(255, 255, 255, 0.6),
+    0 1px 1px rgba(0, 0, 0, 0.06);
+  touch-action: none;
+  cursor: grab;
+  transition: background 0.4s ease;
+}
+
+.wheel:active {
+  cursor: grabbing;
+}
+
+.wheel-label {
+  position: absolute;
+  color: var(--wheel-label);
+  font: 700 calc(var(--d) * 0.052) / 1 var(--font);
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  transition: color 0.12s ease, transform 0.12s ease;
+}
+
+.wheel-label svg {
+  display: block;
+  width: calc(var(--d) * 0.11);
+  height: calc(var(--d) * 0.055);
+  fill: currentColor;
+}
+
+.wheel-label.is-pressed {
+  color: var(--wheel-label-on);
+  transform: scale(0.92);
+}
+
+.w-menu {
+  top: 9%;
+  left: 50%;
+  translate: -50% 0;
+}
+.w-play {
+  bottom: 10%;
+  left: 50%;
+  translate: -50% 0;
+}
+.w-next {
+  right: 7%;
+  top: 50%;
+  translate: 0 -50%;
+}
+.w-prev {
+  left: 7%;
+  top: 50%;
+  translate: 0 -50%;
+}
+
+.wheel-center {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 38%;
+  height: 38%;
+  border: 0;
+  border-radius: 50%;
+  padding: 0;
+  background: var(--center);
+  box-shadow:
+    0 0 0 1px var(--wheel-ring),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 calc(var(--d) * 0.008) calc(var(--d) * 0.02) var(--center-shadow);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+.wheel-center.is-pressed {
+  transform: scale(0.97);
+  box-shadow:
+    0 0 0 1px var(--wheel-ring),
+    inset 0 2px 6px var(--center-shadow);
+}
+
+.wheel-center:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 3px;
+}

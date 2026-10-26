@@ -1,0 +1,69 @@
+/* Base: reset, fondo de página, utilidades. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --page: #e4e5e9;
+  --page-glow: #f7f7f9;
+  --font: -apple-system, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  /* Ancho del iPod: cabe en el ancho y en la altura de la pantalla. */
+  --w: min(92vw, 400px, calc(92vh * 0.6));
+  color-scheme: light;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --w: min(92vw, 400px, calc(92svh * 0.6));
+  }
+}
+
+:root[data-theme='black'] {
+  --page: #0f0f11;
+  --page-glow: #26272b;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: var(--font);
+  background: radial-gradient(120% 80% at 50% 25%, var(--page-glow), var(--page));
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  transition: background 0.4s ease;
+}
+
+.stage {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: max(env(safe-area-inset-top), 12px) 12px max(env(safe-area-inset-bottom), 12px);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.noscript {
+  position: fixed;
+  inset: auto 0 16px;
+  text-align: center;
+  color: #444;
+}
